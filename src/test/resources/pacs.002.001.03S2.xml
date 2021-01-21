@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Document xmlns="urn:iso:std:iso:20022:tech:xsd:pacs.002.001.03S2">
+    <FIToFIPmtStsRptS2>
+        <GrpHdr>
+            <MsgId>0006936999</MsgId>
+            <CreDtTm>2010-02-23T14:29:02.0Z</CreDtTm>
+            <InstgAgt>
+                <FinInstnId>
+                    <BIC>BCYPCY2N</BIC>
+                </FinInstnId>
+            </InstgAgt>
+        </GrpHdr>
+        <OrgnlGrpInfAndSts>
+            <OrgnlMsgId>BCYPCY2N20100223152604686001</OrgnlMsgId>
+            <OrgnlMsgNmId>pacs.004</OrgnlMsgNmId>
+            <OrgnlNbOfTxs>4</OrgnlNbOfTxs>
+            <OrgnlCtrlSum>1200</OrgnlCtrlSum>
+            <GrpSts>ACCP</GrpSts>
+            <StsRsnInf>
+                <Orgtr>
+                    <Id>
+                        <OrgId>
+                            <BICOrBEI>DEUTDEFF</BICOrBEI>
+                        </OrgId>
+                    </Id>
+                </Orgtr>
+                <Rsn>
+                    <Prtry>B00</Prtry>
+                </Rsn>
+            </StsRsnInf>
+        </OrgnlGrpInfAndSts>
+    </FIToFIPmtStsRptS2>
+</Document>
