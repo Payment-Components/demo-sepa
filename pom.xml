@@ -20,7 +20,7 @@
         <dependency>
             <groupId>gr.datamation</groupId>
             <artifactId>sepa-core-jaxb</artifactId>
-            <version>19.25.0</version>
+            <version>21.0.0</version>
             <classifier>demo</classifier>
         </dependency>
 
