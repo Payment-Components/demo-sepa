@@ -13,7 +13,7 @@ public class Utils {
     public static void printValidMessageOrErrors(CoreMessage message) {
         if (!message.hasValidationErrors()) {
             System.out.println("Message is valid");
-            System.out.println(message.toString());
+            System.out.println(message);
         } else {
             System.err.println("Message is invalid, and the errors are the following:");
             for (Object error : message.getErrors()) {

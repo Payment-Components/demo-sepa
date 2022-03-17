@@ -6,7 +6,7 @@ SEPA Messages Validation works. For our demonstration we are going to use the de
 It's a simple maven project, you can download it and run it, with Java 1.8 or above.
 
 ## SDK setup
-Incorporate the SDK [jar](https://nexus.paymentcomponents.com/repository/public/gr/datamation/sepa-core-jaxb/21.0.0/sepa-core-jaxb-21.0.0-demo.jar) into your project by the regular IDE means. 
+Incorporate the SDK [jar](https://nexus.paymentcomponents.com/repository/public/gr/datamation/sepa-core-jaxb/21.9.0/sepa-core-jaxb-21.9.0-demo.jar) into your project by the regular IDE means. 
 This process will vary depending upon your specific IDE and you should consult your documentation on how to deploy a bean. 
 For example in Eclipse all that needs to be done is to import the jar files into a project.
 Alternatively, you can import it as a Maven or Gradle dependency.  
@@ -24,7 +24,7 @@ Import the SDK
 <dependency>
     <groupId>gr.datamation</groupId>
     <artifactId>sepa-core-jaxb</artifactId>
-    <version>21.0.0</version>
+    <version>21.9.0</version>
     <classifier>demo</classifier>
 </dependency>
 ```
@@ -40,7 +40,7 @@ repositories {
 ```
 Import the SDK
 ```groovy
-implementation 'gr.datamation:sepa-core-jaxb:21.0.0:demo@jar'
+implementation 'gr.datamation:sepa-core-jaxb:21.9.0:demo@jar'
 ```
 In case you purchase the SDK you will be given a protected Maven repository with a user name and a password. You can configure your project to download the SDK from there.
 
@@ -207,145 +207,160 @@ In this project you can see code for all the basic manipulation of an SEPA messa
     msgReplyInfo.add(new MsgReplyInfo("TXID", new ReasonCode(ReasonCode.CD, "AC01", null, null), MsgReplyInfo.MSGID_BASED, "RETURNID", "", new Date()));
     pacs004message = pacs008message.autoReply(pacs004message, msgReplyInfo);
     ```
+- [SEPA Instant](https://gist.github.com/PaymentComponents/3fdab3b73885450a65b24c889c93c974)  
+    For available SEPA Instant messages please advice [this](#EPC---SEPA-INSTANT) table.
+    For available SEPA Instant RT messages please advice [this](#RT-Message-Support-List) table.
     
 
 ## Message Appendix
 
 ##### EBA - SEPA CREDIT TRANSFERS
 
-|Message Name|Msg ID|Schema ID|
-|---|---|---|
-|FIToFICustomerCreditTransfer|FIToFICstmrCdtTrf|pacs.008.001.02|
-|FIToFIPaymentStatusReport|FIToFIPmtStsRptS2|pacs.002.001.03S2|
-|PaymentReturn|PmtRtr|pacs.004.001.02|
-|FIToFIPaymentInstantStatusInquiryForInvestigation|FIToFIPmtStsReq|pacs.028.001.01|
-|CustomerCreditTransferInitiation|CstmrCdtTrfInitn|pain.001.001.03|
-|CustomerPaymentStatusReport|CstmrPmtStsRpt|pain.002.001.03|
-|ClaimNonReceipt|ClmNonRct|camt.027.001.06|
-|ResolutionOfInvestigation|RsltnOfInvstgtn|camt.029.001.03|
-|ResolutionOfInvestigation08|RsltnOfInvstgtn|camt.029.001.08|
-|BankToCustomerStatementV4|BkToCstmrStmt|camt.053.001.04|
-|BankToCustomerDebitCreditNotificationV2|BkToCstmrDbtCdtNtfctn|camt.054.001.02|
-|BankToCustomerDebitCreditNotificationV3|BkToCstmrDbtCdtNtfctn|camt.054.001.03|
-|RequestToModifyPayment|ReqToModfyPmt|camt.087.001.05|
-|FIToFIPaymentCancellationRequest|FIToFIPmtCxlReq|camt.056.001.01|
-|SCTCcfBulkCreditTransfer|SCTCcfBlkCredTrf|SCTCcfBlkCredTrf|
-|SCTCvfBulkCreditTransfer|SCTCvfBlkCredTrf|SCTCvfBlkCredTrf|
-|SCTIcfBulkCreditTransfer|SCTIcfBlkCredTrf|SCTIcfBlkCredTrf|
-|SCTIqfBulkCreditTransfer|SCTIqfBlkCredTrf|SCTIqfBlkCredTrf|
-|SCTScfBulkCreditTransfer|SCTScfBlkCredTrf|SCTScfBlkCredTrf|
-|SCTOqfBulkCreditTransfer|SCTOqfBlkCredTrf|SCTOqfBlkCredTrf|
-|SCTQvfBulkCreditTransfer|SCTQvfBlkCredTrf|SCTQvfBlkCredTrf|
-|SCTPcfBulkCreditTransfer|SCTPcfBlkCredTrf|SCTPcfBlkCredTrf|
+| Message Name                                      | Msg ID                | Schema ID         |
+|---------------------------------------------------|-----------------------|-------------------|
+| FIToFICustomerCreditTransfer                      | FIToFICstmrCdtTrf     | pacs.008.001.02   |
+| FIToFIPaymentStatusReport                         | FIToFIPmtStsRptS2     | pacs.002.001.03S2 |
+| PaymentReturn                                     | PmtRtr                | pacs.004.001.02   |
+| FIToFIPaymentInstantStatusInquiryForInvestigation | FIToFIPmtStsReq       | pacs.028.001.01   |
+| CustomerCreditTransferInitiation                  | CstmrCdtTrfInitn      | pain.001.001.03   |
+| CustomerPaymentStatusReport                       | CstmrPmtStsRpt        | pain.002.001.03   |
+| ClaimNonReceipt                                   | ClmNonRct             | camt.027.001.06   |
+| ResolutionOfInvestigation                         | RsltnOfInvstgtn       | camt.029.001.03   |
+| ResolutionOfInvestigation08                       | RsltnOfInvstgtn       | camt.029.001.08   |
+| BankToCustomerStatementV4                         | BkToCstmrStmt         | camt.053.001.04   |
+| BankToCustomerDebitCreditNotificationV2           | BkToCstmrDbtCdtNtfctn | camt.054.001.02   |
+| BankToCustomerDebitCreditNotificationV3           | BkToCstmrDbtCdtNtfctn | camt.054.001.03   |
+| RequestToModifyPayment                            | ReqToModfyPmt         | camt.087.001.05   |
+| FIToFIPaymentCancellationRequest                  | FIToFIPmtCxlReq       | camt.056.001.01   |
+| SCTCcfBulkCreditTransfer                          | SCTCcfBlkCredTrf      | SCTCcfBlkCredTrf  |
+| SCTCvfBulkCreditTransfer                          | SCTCvfBlkCredTrf      | SCTCvfBlkCredTrf  |
+| SCTIcfBulkCreditTransfer                          | SCTIcfBlkCredTrf      | SCTIcfBlkCredTrf  |
+| SCTIqfBulkCreditTransfer                          | SCTIqfBlkCredTrf      | SCTIqfBlkCredTrf  |
+| SCTScfBulkCreditTransfer                          | SCTScfBlkCredTrf      | SCTScfBlkCredTrf  |
+| SCTOqfBulkCreditTransfer                          | SCTOqfBlkCredTrf      | SCTOqfBlkCredTrf  |
+| SCTQvfBulkCreditTransfer                          | SCTQvfBlkCredTrf      | SCTQvfBlkCredTrf  |
+| SCTPcfBulkCreditTransfer                          | SCTPcfBlkCredTrf      | SCTPcfBlkCredTrf  |
 
 ##### EPC - SEPA CREDIT TRANSFERS
 
-|Message Name|Msg ID|Schema ID|
-|---|---|---|
-|PaymentStatusReport|FIToFIPmtStsRpt|pacs.002.001.03|
-|PaymentReturn|PmtRtr|pacs.004.001.02|
-|FIToFICustomerCreditTransfer|FIToFICstmrCdtTrf|pacs.008.001.02|
-|FIToFIPaymentInstantStatusInquiryForInvestigation|FIToFIPmtStsReq|pacs.028.001.01|
-|ClaimNonReceipt|ClmNonRct|camt.027.001.06|
-|ResolutionOfInvestigation|RsltnOfInvstgtn|camt.029.001.03|
-|ResolutionOfInvestigation08|RsltnOfInvstgtn|camt.029.001.08|
-|FIToFIPaymentCancellationRequest|FIToFIPmtCxlReq|camt.056.001.01|
-|RequestToModifyPayment|ReqToModfyPmt|camt.087.001.05|
+| Message Name                                      | Msg ID            | Schema ID       |
+|---------------------------------------------------|-------------------|-----------------|
+| PaymentStatusReport                               | FIToFIPmtStsRpt   | pacs.002.001.03 |
+| PaymentReturn                                     | PmtRtr            | pacs.004.001.02 |
+| FIToFICustomerCreditTransfer                      | FIToFICstmrCdtTrf | pacs.008.001.02 |
+| FIToFIPaymentInstantStatusInquiryForInvestigation | FIToFIPmtStsReq   | pacs.028.001.01 |
+| ClaimNonReceipt                                   | ClmNonRct         | camt.027.001.06 |
+| ResolutionOfInvestigation                         | RsltnOfInvstgtn   | camt.029.001.03 |
+| ResolutionOfInvestigation08                       | RsltnOfInvstgtn   | camt.029.001.08 |
+| FIToFIPaymentCancellationRequest                  | FIToFIPmtCxlReq   | camt.056.001.01 |
+| RequestToModifyPayment                            | ReqToModfyPmt     | camt.087.001.05 |
 
 ##### DIAS - SEPA CREDIT TRANSFERS
 
-|Message Name|Msg ID|Schema ID|
-|---|---|---|
-|ClaimNonReceipt|ClmNonRct|camt.027.001.06|
-|ResolutionOfInvestigation|RsltnOfInvstgtn|camt.029.001.03|
-|ResolutionOfInvestigation08|RsltnOfInvstgtn|camt.029.001.08|
-|FIToFIPaymentCancellationRequest|FIToFIPmtCxlReq|camt.056.001.01|
-|RequestToModifyPayment|ReqToModfyPmt|camt.087.001.05|
-|FIToFIPaymentStatusReport|FIToFIPmtStsRpt|pacs.002.001.03|
-|PaymentReturn|PmtRtr|pacs.004.001.02|
-|FIToFICustomerCreditTransfer|FIToFICstmrCdtTrf|pacs.008.001.02|
-|FIToFIPaymentStatusRequest|FIToFIPmtStsReq|pacs.028.001.01|
-|DCTBulkCreditTransfer|DIASFileHdr|DIASSCTFH|
+| Message Name                     | Msg ID            | Schema ID       |
+|----------------------------------|-------------------|-----------------|
+| ClaimNonReceipt                  | ClmNonRct         | camt.027.001.06 |
+| ResolutionOfInvestigation        | RsltnOfInvstgtn   | camt.029.001.03 |
+| ResolutionOfInvestigation08      | RsltnOfInvstgtn   | camt.029.001.08 |
+| FIToFIPaymentCancellationRequest | FIToFIPmtCxlReq   | camt.056.001.01 |
+| RequestToModifyPayment           | ReqToModfyPmt     | camt.087.001.05 |
+| FIToFIPaymentStatusReport        | FIToFIPmtStsRpt   | pacs.002.001.03 |
+| PaymentReturn                    | PmtRtr            | pacs.004.001.02 |
+| FIToFICustomerCreditTransfer     | FIToFICstmrCdtTrf | pacs.008.001.02 |
+| FIToFIPaymentStatusRequest       | FIToFIPmtStsReq   | pacs.028.001.01 |
+| DCTBulkCreditTransfer            | DIASFileHdr       | DIASSCTFH       |
    
 ##### SIBS - SEPA CREDIT TRANSFERS   
 
-|Message Name|Msg ID|Schema ID|
-|---|---|---|
-|ClaimNonReceipt|ClmNonRct|camtx.027.001.06|
-|ResolutionOfInvestigation|RsltnOfInvstgtn|camtx.029.001.03|
-|ResolutionOfInvestigation08|RsltnOfInvstgtn|camtx.029.001.08|
-|FIToFIPaymentCancellationRequest|FIToFIPmtCxlReq|camtx.056.001.01|
-|RequestToModifyPayment|ReqToModfyPmt|camtx.087.001.05|
-|FIToFIPaymentStatusReport|FIToFIPmtStsRptS2|pacsx.002.001.03S2|
-|PaymentReturn|PmtRtr|pacsx.004.001.02|
-|FIToFICustomerCreditTransfer|FIToFICstmrCdtTrf|pacsx.008.001.02|
-|FIToFIPaymentInstantStatusInquiryForInvestigation|FIToFIPmtStsReq|pacsx.028.001.01|
-|SCTCcxBulkCreditTransfer|SCTCcfBlkCredTrf|SCTCcxBlkCredTrf|
-|SCTCvxBulkCreditTransfer|SCTCvfBlkCredTrf|SCTCvxBlkCredTrf|
-|SCTIcxBulkCreditTransfer|SCTIcfBlkCredTrf|SCTIcxBlkCredTrf|
-|SCTScxBulkCreditTransfer|SCTScfBlkCredTrf|SCTScxBlkCredTrf|
-|SCTIqxBulkCreditTransfer|SCTIqfBlkCredTrf|SCTIqxBlkCredTrf|
-|SCTOqxBulkCreditTransfer|SCTOqfBlkCredTrf|SCTOqxBlkCredTrf|
-|SCTQvxBulkCreditTransfer|SCTQvfBlkCredTrf|SCTQvxBlkCredTrf|
+| Message Name                                      | Msg ID            | Schema ID          |
+|---------------------------------------------------|-------------------|--------------------|
+| ClaimNonReceipt                                   | ClmNonRct         | camtx.027.001.06   |
+| ResolutionOfInvestigation                         | RsltnOfInvstgtn   | camtx.029.001.03   |
+| ResolutionOfInvestigation08                       | RsltnOfInvstgtn   | camtx.029.001.08   |
+| FIToFIPaymentCancellationRequest                  | FIToFIPmtCxlReq   | camtx.056.001.01   |
+| RequestToModifyPayment                            | ReqToModfyPmt     | camtx.087.001.05   |
+| FIToFIPaymentStatusReport                         | FIToFIPmtStsRptS2 | pacsx.002.001.03S2 |
+| PaymentReturn                                     | PmtRtr            | pacsx.004.001.02   |
+| FIToFICustomerCreditTransfer                      | FIToFICstmrCdtTrf | pacsx.008.001.02   |
+| FIToFIPaymentInstantStatusInquiryForInvestigation | FIToFIPmtStsReq   | pacsx.028.001.01   |
+| SCTCcxBulkCreditTransfer                          | SCTCcfBlkCredTrf  | SCTCcxBlkCredTrf   |
+| SCTCvxBulkCreditTransfer                          | SCTCvfBlkCredTrf  | SCTCvxBlkCredTrf   |
+| SCTIcxBulkCreditTransfer                          | SCTIcfBlkCredTrf  | SCTIcxBlkCredTrf   |
+| SCTScxBulkCreditTransfer                          | SCTScfBlkCredTrf  | SCTScxBlkCredTrf   |
+| SCTIqxBulkCreditTransfer                          | SCTIqfBlkCredTrf  | SCTIqxBlkCredTrf   |
+| SCTOqxBulkCreditTransfer                          | SCTOqfBlkCredTrf  | SCTOqxBlkCredTrf   |
+| SCTQvxBulkCreditTransfer                          | SCTQvfBlkCredTrf  | SCTQvxBlkCredTrf   |
 
 ##### EBA - SEPA DIRECT DEBITS
 
-|Message Name|Msg ID|Schema ID|
-|---|---|---|
-|FIToFIPaymentCancellationRequest|FIToFIPmtCxlReq|camt.056.001.01|
-|FIToFIPaymentStatusReport|FIToFIPmtStsRpt|pacs.002.001.03|
-|FIToFICustomerDirectDebit|FIToFICstmrDrctDbt|pacs.003.001.02|
-|PaymentReturn|PmtRtr|pacs.004.001.02|
-|FIToFIPaymentReversal|FIToFIPmtRvsl|pacs.007.001.02|
-|MPEDDIdfBlkDirDeb|MPEDDIdfBlkDirDeb|MPEDDIdfBlkDirDeb|
+| Message Name                     | Msg ID             | Schema ID         |
+|----------------------------------|--------------------|-------------------|
+| FIToFIPaymentCancellationRequest | FIToFIPmtCxlReq    | camt.056.001.01   |
+| FIToFIPaymentStatusReport        | FIToFIPmtStsRpt    | pacs.002.001.03   |
+| FIToFICustomerDirectDebit        | FIToFICstmrDrctDbt | pacs.003.001.02   |
+| PaymentReturn                    | PmtRtr             | pacs.004.001.02   |
+| FIToFIPaymentReversal            | FIToFIPmtRvsl      | pacs.007.001.02   |
+| MPEDDIdfBlkDirDeb                | MPEDDIdfBlkDirDeb  | MPEDDIdfBlkDirDeb |
 
 ##### EPC - SEPA DIRECT DEBITS
 
-|Message Name|Msg ID|Schema ID|
-|---|---|---|
-|FIToFIPaymentStatusReport|FIToFIPmtStsRpt|pacs.002.001.03|
-|FIToFICustomerDirectDebit|FIToFICstmrDrctDbt|pacs.003.001.02|
-|PaymentReturn|PmtRtr|pacs.004.001.02|
-|FIToFIPaymentReversal|FIToFIPmtRvsl|pacs.007.001.02|
-|CustomerDirectDebitInitiation|CstmrDrctDbtInitn|pain.008.001.02|
+| Message Name                  | Msg ID             | Schema ID       |
+|-------------------------------|--------------------|-----------------|
+| FIToFIPaymentStatusReport     | FIToFIPmtStsRpt    | pacs.002.001.03 |
+| FIToFICustomerDirectDebit     | FIToFICstmrDrctDbt | pacs.003.001.02 |
+| PaymentReturn                 | PmtRtr             | pacs.004.001.02 |
+| FIToFIPaymentReversal         | FIToFIPmtRvsl      | pacs.007.001.02 |
+| CustomerDirectDebitInitiation | CstmrDrctDbtInitn  | pain.008.001.02 |
 
 ##### SIBS - SEPA DIRECT DEBITS
 
-|Message Name|Msg ID|Schema ID|
-|---|---|---|
-|FIToFIPaymentCancellationRequest|FIToFIPmtCxlReq|camt.056.001.01|
-|FIToFICustomerDirectDebit|FIToFICstmrDrctDbt|pacs.003.001.02|
-|FIToFIPaymentReversal|FIToFIPmtRvsl|pacs.007.001.02|
-|FIToFIPaymentStatusReport|FIToFIPmtStsRpt|pacs.002.001.03|
-|FIToFIPaymentStatusReportS2|FIToFIPmtStsRpt|pacs.002.001.03S2|
-|PaymentReturn|PmtRtr|pacs.004.001.02|
-|MPEDDCdxBulkDirectDebit|MPEDDCdxBlkDirDeb|MPEDDCdxBlkDirDeb|
-|MPEDDDnxBulkDirectDebit|MPEDDDnxBlkDirDeb|MPEDDDnxBlkDirDeb|
-|MPEDDDrxBulkDirectDebit|MPEDDDrxBlkDirDeb|MPEDDDrxBlkDirDeb|
-|MPEDDDvxBulkDirectDebit|MPEDDDvfBlkDirDeb|MPEDDDvxBlkDirDeb|
-|MPEDDIdxBulkDirectDebit|MPEDDIdxBlkDirDeb|MPEDDIdxBlkDirDeb|
-|MPEDDIrxBulkDirectDebit|MPEDDIrxBlkDirDeb|MPEDDIrxBlkDirDeb|
-|MPEDDRsxBulkDirectDebit|MPEDDRsfBlkDirDeb|MPEDDRsxBlkDirDeb|
-|MPEDDSdxBulkDirectDebit|MPEDDSdfBlkDirDeb|MPEDDSdxBlkDirDeb|
+| Message Name                     | Msg ID             | Schema ID         |
+|----------------------------------|--------------------|-------------------|
+| FIToFIPaymentCancellationRequest | FIToFIPmtCxlReq    | camt.056.001.01   |
+| FIToFICustomerDirectDebit        | FIToFICstmrDrctDbt | pacs.003.001.02   |
+| FIToFIPaymentReversal            | FIToFIPmtRvsl      | pacs.007.001.02   |
+| FIToFIPaymentStatusReport        | FIToFIPmtStsRpt    | pacs.002.001.03   |
+| FIToFIPaymentStatusReportS2      | FIToFIPmtStsRpt    | pacs.002.001.03S2 |
+| PaymentReturn                    | PmtRtr             | pacs.004.001.02   |
+| MPEDDCdxBulkDirectDebit          | MPEDDCdxBlkDirDeb  | MPEDDCdxBlkDirDeb |
+| MPEDDDnxBulkDirectDebit          | MPEDDDnxBlkDirDeb  | MPEDDDnxBlkDirDeb |
+| MPEDDDrxBulkDirectDebit          | MPEDDDrxBlkDirDeb  | MPEDDDrxBlkDirDeb |
+| MPEDDDvxBulkDirectDebit          | MPEDDDvfBlkDirDeb  | MPEDDDvxBlkDirDeb |
+| MPEDDIdxBulkDirectDebit          | MPEDDIdxBlkDirDeb  | MPEDDIdxBlkDirDeb |
+| MPEDDIrxBulkDirectDebit          | MPEDDIrxBlkDirDeb  | MPEDDIrxBlkDirDeb |
+| MPEDDRsxBulkDirectDebit          | MPEDDRsfBlkDirDeb  | MPEDDRsxBlkDirDeb |
+| MPEDDSdxBulkDirectDebit          | MPEDDSdfBlkDirDeb  | MPEDDSdxBlkDirDeb |
+
+##### EPC - SEPA INSTANT
+
+| Message Name                     | Msg ID            | Schema ID           | EpcType Enumeration                                                                                                                |
+|----------------------------------|-------------------|---------------------|------------------------------------------------------------------------------------------------------------------------------------|
+| FIToFICustomerCreditTransfer     | FIToFICstmrCdtTrf | pacs.008.001.02     | CREDIT_TRANSFER                                                                                                                    |
+| FIToFIPaymentStatusReport        | FIToFIPmtStsRpt   | pacs.002.001.03     | NEGATIVE<br/>POSITIVE                                                                                                              |
+| FIToFIPaymentStatusRequest       | FIToFIPmtStsReq   | pacs.028.001.01     | TRANSACTION_STATUS_INVESTIGATION<br/>REQUEST_FOR_STATUS_UPDATE_FOR_RECALL<br/>REQUEST_FOR_STATUS_UPDATE_FOR_RECALL_FROM_ORIGINATOR |
+| PaymentReturn                    | PmtRtr            | pacs.004.001.02     | POSITIVE_RESPONSE_TO_RECALL<br/>POSITIVE_RESPONSE_TO_RECALL_FROM_ORIGINATOR                                                        |
+| FIToFIPaymentCancellationRequest | FIToFIPmtCxlReq   | camt.056.001.01     | REQUEST_FOR_RECALL<br/>REQUEST_FOR_RECALL_FROM_ORIGINATOR                                                                          |
+| ResolutionOfInvestigation        | RsltnOfInvstgtn   | camt.029.001.03     | NEGATIVE_RESPONSE_TO_RECALL<br/>NEGATIVE_RESPONSE_TO_RECALL_FROM_ORIGINATOR                                                        |
 
 ## RT Message Support List
 
 ##### FIToFICustomerCreditTransfer (pacs.008.001.02) autoReply return objects
 
-|Message Name|Schema ID|Variations support|
-|---|---|---|
-|PaymentReturn|pacs.004.001.02|eba, epc, sibs, dias|
-|FIToFIPaymentInstantStatusInquiryForInvestigation|pacs.028.001.01|eba, epc, sibs, dias|
-|ClaimNonReceipt|camt.027.001.06|eba, epc, sibs, dias|
-|ResolutionOfInvestigation|camt.029.001.03|eba, epc, sibs, dias|
-|ResolutionOfInvestigation08|camt.029.001.08|eba, epc, sibs, dias|
-|FIToFIPaymentCancellationRequest|camt.056.001.01|eba, epc, sibs, dias|
-|RequestToModifyPayment|camt.087.001.05|eba, epc, sibs, dias|
+| Message Name                                      | Schema ID       | Variations support                |
+|---------------------------------------------------|-----------------|-----------------------------------|
+| PaymentReturn                                     | pacs.004.001.02 | eba, epc, sibs, dias, epc-instant |
+| FIToFIPaymentInstantStatusInquiryForInvestigation | pacs.028.001.01 | eba, epc, sibs, dias, epc-instant |
+| ClaimNonReceipt                                   | camt.027.001.06 | eba, epc, sibs, dias              |
+| ResolutionOfInvestigation                         | camt.029.001.03 | eba, epc, sibs, dias, epc-instant |
+| ResolutionOfInvestigation08                       | camt.029.001.08 | eba, epc, sibs, dias              |
+| FIToFIPaymentCancellationRequest                  | camt.056.001.01 | eba, epc, sibs, dias, epc-instant |
+| RequestToModifyPayment                            | camt.087.001.05 | eba, epc, sibs, dias              |
+| FIToFIPaymentStatusReport                         | pacs.002.001.03 | epc-instant                       |
 
 ##### FIToFICustomerDirectDebit (pacs.003.001.02) autoReply return objects
 
-|Message Name|Schema ID|Variations support|
-|---|---|---|
-|PaymentReturn|pacs.004.001.02|eba, epc, sibs|
-|FIToFIPaymentCancellationRequest|camt.056.001.01|epc, sibs|
-|FIToFIPaymentReversal|pacs.007.001.02|epc, sibs|
+| Message Name                     | Schema ID       | Variations support |
+|----------------------------------|-----------------|--------------------|
+| PaymentReturn                    | pacs.004.001.02 | eba, epc, sibs     |
+| FIToFIPaymentCancellationRequest | camt.056.001.01 | epc, sibs          |
+| FIToFIPaymentReversal            | pacs.007.001.02 | epc, sibs          |
