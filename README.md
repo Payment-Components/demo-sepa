@@ -169,51 +169,51 @@ In this project you can see code for all the basic manipulation of an SEPA messa
 
 ### More features are included in the paid version like
 
-- [Support for all available messages](https://github.com/Payment-Components/demo-sepa/blob/main/README.md#message-appendix)  
-- [Resolve Transactions](https://gist.github.com/apolichronopoulos/74db3c490cd30dcdd884af5a10373dce)  
-    In addition to the getElement methods, the `resolveTransaction()` or `resolveTransactions()` methods can be used to greatly simplify the parsing of messages.
-    The following uses a FIToFICustomerCreditTransfer (`pacs.008.001.02`) message as an example. These methods return vectors of vectors of LeafInfo objects.
-    LeafInfo objects have 3 fields:
-    
-    |Node|Leaf field|Example|
-    |---|---|---|
-    |0|fieldPath|/CdtTrfTxInf/PmtId|
-    |1|fieldCd|InstrId|
-    |2|value|DEUTDE0920000891|
-- [Building Reply Messages](https://gist.github.com/apolichronopoulos/27892018e62f36344044987daa299bc0)  
-    The Reply Message (R-Transactions, RT) is a SEPA message that is used to provide an automatic response to a message. 
-    An RT can be constructed and modified according to the following instructions. 
-    This feature is designed to simplify the creation of an RT since it can be automatically constructed by following the specification of the initiating message.
-    The construction of the RT is defined by an internal mechanism whose prime purpose is to:  
-    
-    1. Transfer "common" data blocks (or reusable information) from the original message to the RT.
-    2. Create the required message blocks depending on whether the RT message applies to all the transactions of the original message or not.
-    
-    The resulting RT contains all the "reusable" data extracted from the initial message and only requires the addition of any further necessary data to complete the creation of the RT.
-    _Note that: until all mandatory data has been added, the RT object will not be able to produce a valid message._   
-    
-    The construction of an RT is implemented in the class of the respective SEPA message, via the `autoReply(CoreMessage, List<MsgReplyInfo>)` method.
-    The first parameter specifies the return type of the RT (since an existing message could have more than one possible response types, [RT Message Support List](https://github.com/Payment-Components/demo-sepa/blob/main/README.md#rt-message-support-list)).
-    The second parameter specifies the necessary information to build the RT message using our `MsgReplyInfo` object.  
-    For example, assuming that:
-    
-    - the variable named `pacs008message` holds a valid FIToFICustomerCreditTransfer message (pacs.008.001.02).
-    - the variable named `pacs004message` with an empty PaymentReturn message (pacs.004.001.02) which is one of the possible replies of the FIToFICustomerCreditTransfer message
-    - the RT does not refer to all transactions declared in the FIToFICustomerCreditTransfer. 
-    
-    Then, the calling of the autoReply method using the following code will return a PaymentReturn object.
-    ```java
-    PaymentReturn pacs004message = new PaymentReturn();
-    Vector<MsgReplyInfo> msgReplyInfo = new Vector<MsgReplyInfo>(); 
-    msgReplyInfo.add(new MsgReplyInfo("TXID", new ReasonCode(ReasonCode.CD, "AC01", null, null), MsgReplyInfo.MSGID_BASED, "RETURNID", "", new Date()));
-    pacs004message = pacs008message.autoReply(pacs004message, msgReplyInfo);
-    ```
-- [SEPA Instant](https://gist.github.com/PaymentComponents/3fdab3b73885450a65b24c889c93c974)  
-    For available SEPA Instant messages please advice [this](#EPC---SEPA-INSTANT) table.
-    For available SEPA Instant RT messages please advice [this](#RT-Message-Support-List) table.
+- #### [Support for all available messages](https://github.com/Payment-Components/demo-sepa/blob/main/README.md#message-appendix)  
+- #### [Resolve Transactions](https://gist.github.com/apolichronopoulos/74db3c490cd30dcdd884af5a10373dce)  
+  In addition to the getElement methods, the `resolveTransaction()` or `resolveTransactions()` methods can be used to greatly simplify the parsing of messages.
+  The following uses a FIToFICustomerCreditTransfer (`pacs.008.001.02`) message as an example. These methods return vectors of vectors of LeafInfo objects.
+  LeafInfo objects have 3 fields:
+  
+  |Node|Leaf field|Example|
+  |---|---|---|
+  |0|fieldPath|/CdtTrfTxInf/PmtId|
+  |1|fieldCd|InstrId|
+  |2|value|DEUTDE0920000891|
+- #### [Building Reply Messages](https://gist.github.com/apolichronopoulos/27892018e62f36344044987daa299bc0)  
+  The Reply Message (R-Transactions, RT) is a SEPA message that is used to provide an automatic response to a message. 
+  An RT can be constructed and modified according to the following instructions. 
+  This feature is designed to simplify the creation of an RT since it can be automatically constructed by following the specification of the initiating message.
+  The construction of the RT is defined by an internal mechanism whose prime purpose is to:  
+  
+  1. Transfer "common" data blocks (or reusable information) from the original message to the RT.
+  2. Create the required message blocks depending on whether the RT message applies to all the transactions of the original message or not.
+  
+  The resulting RT contains all the "reusable" data extracted from the initial message and only requires the addition of any further necessary data to complete the creation of the RT.
+  _Note that: until all mandatory data has been added, the RT object will not be able to produce a valid message._   
+  
+  The construction of an RT is implemented in the class of the respective SEPA message, via the `autoReply(CoreMessage, List<MsgReplyInfo>)` method.
+  The first parameter specifies the return type of the RT (since an existing message could have more than one possible response types, [RT Message Support List](https://github.com/Payment-Components/demo-sepa/blob/main/README.md#rt-message-support-list)).
+  The second parameter specifies the necessary information to build the RT message using our `MsgReplyInfo` object.  
+  For example, assuming that:
+  
+  - the variable named `pacs008message` holds a valid FIToFICustomerCreditTransfer message (pacs.008.001.02).
+  - the variable named `pacs004message` with an empty PaymentReturn message (pacs.004.001.02) which is one of the possible replies of the FIToFICustomerCreditTransfer message
+  - the RT does not refer to all transactions declared in the FIToFICustomerCreditTransfer. 
+  
+  Then, the calling of the autoReply method using the following code will return a PaymentReturn object.
+  ```java
+  PaymentReturn pacs004message = new PaymentReturn();
+  Vector<MsgReplyInfo> msgReplyInfo = new Vector<MsgReplyInfo>(); 
+  msgReplyInfo.add(new MsgReplyInfo("TXID", new ReasonCode(ReasonCode.CD, "AC01", null, null), MsgReplyInfo.MSGID_BASED, "RETURNID", "", new Date()));
+  pacs004message = pacs008message.autoReply(pacs004message, msgReplyInfo);
+  ```
+- #### [SEPA Instant](https://gist.github.com/PaymentComponents/3fdab3b73885450a65b24c889c93c974)  
+   For available SEPA Instant messages please advice [this](#EPC---SEPA-INSTANT) table.  
+   For available SEPA Instant RT messages please advice [this](#RT-Message-Support-List) table.
 
-- [P27](https://gist.github.com/johnmara-pc14/6c437e3e45ee660cf2c563b037add686)  
-  For available P27 messages please advice [this](#P27---NORDIC-CREDIT-TRANSFERS) table.
+- #### [P27](https://gist.github.com/johnmara-pc14/6c437e3e45ee660cf2c563b037add686)  
+  For available P27 messages please advice [this](#P27---NORDIC-CREDIT-TRANSFERS) table.  
   For available P27 RT messages please advice [this](#RT-Message-Support-List) table.
     
 
