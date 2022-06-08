@@ -7,6 +7,7 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 public class Utils {
 
@@ -23,8 +24,18 @@ public class Utils {
     }
 
     public static XMLGregorianCalendar xmlGregorianCalendar() {
-        GregorianCalendar cal = new GregorianCalendar();
-        cal.setTime(new Date());
+        return xmlGregorianCalendar(null);
+    }
+
+    public static XMLGregorianCalendar xmlGregorianCalendar(TimeZone timeZone) {
+        GregorianCalendar cal;
+        if (timeZone != null) {
+            cal = (GregorianCalendar) GregorianCalendar.getInstance(timeZone);
+        } else {
+            cal = new GregorianCalendar();
+            cal.setTime(new Date());
+        }
+
         XMLGregorianCalendar xmlDate = null;
         try {
             xmlDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(cal);

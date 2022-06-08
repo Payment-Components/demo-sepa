@@ -6,7 +6,7 @@ SEPA Messages Validation works. For our demonstration we are going to use the de
 It's a simple maven project, you can download it and run it, with Java 1.8 or above.
 
 ## SDK setup
-Incorporate the SDK [jar](https://nexus.paymentcomponents.com/repository/public/gr/datamation/sepa-core-jaxb/21.9.0/sepa-core-jaxb-21.9.0-demo.jar) into your project by the regular IDE means. 
+Incorporate the SDK [jar](https://nexus.paymentcomponents.com/repository/public/gr/datamation/sepa-core-jaxb/21.12.0/sepa-core-jaxb-21.12.0-demo.jar) into your project by the regular IDE means. 
 This process will vary depending upon your specific IDE and you should consult your documentation on how to deploy a bean. 
 For example in Eclipse all that needs to be done is to import the jar files into a project.
 Alternatively, you can import it as a Maven or Gradle dependency.  
@@ -24,7 +24,7 @@ Import the SDK
 <dependency>
     <groupId>gr.datamation</groupId>
     <artifactId>sepa-core-jaxb</artifactId>
-    <version>21.9.0</version>
+    <version>21.12.0</version>
     <classifier>demo</classifier>
 </dependency>
 ```
@@ -40,7 +40,7 @@ repositories {
 ```
 Import the SDK
 ```groovy
-implementation 'gr.datamation:sepa-core-jaxb:21.9.0:demo@jar'
+implementation 'gr.datamation:sepa-core-jaxb:21.12.0:demo@jar'
 ```
 In case you purchase the SDK you will be given a protected Maven repository with a user name and a password. You can configure your project to download the SDK from there.
 
@@ -55,6 +55,7 @@ This demo contains the `eba` version of `pacs.002.001.03`.
 - `epc` - European Payment Council
 - `dias` - DIAS Interbanking System
 - `sibs` - SIBS International
+- `p27` -  Nordic Payments
 
 All SEPA messages are identified by a code id and a name. 
 The code id (`FIToFIPmtStsRptS2`) and the name (`FIToFIPaymentStatusReportV03`) are located in the .xsd file that describes the XML schema of each message.   
@@ -210,6 +211,10 @@ In this project you can see code for all the basic manipulation of an SEPA messa
 - [SEPA Instant](https://gist.github.com/PaymentComponents/3fdab3b73885450a65b24c889c93c974)  
     For available SEPA Instant messages please advice [this](#EPC---SEPA-INSTANT) table.
     For available SEPA Instant RT messages please advice [this](#RT-Message-Support-List) table.
+
+- [P27](https://gist.github.com/johnmara-pc14/6c437e3e45ee660cf2c563b037add686)  
+  For available P27 messages please advice [this](#P27---NORDIC-CREDIT-TRANSFERS) table.
+  For available P27 RT messages please advice [this](#RT-Message-Support-List) table.
     
 
 ## Message Appendix
@@ -342,20 +347,34 @@ In this project you can see code for all the basic manipulation of an SEPA messa
 | FIToFIPaymentCancellationRequest | FIToFIPmtCxlReq   | camt.056.001.01     | REQUEST_FOR_RECALL<br/>REQUEST_FOR_RECALL_FROM_ORIGINATOR                                                                          |
 | ResolutionOfInvestigation        | RsltnOfInvstgtn   | camt.029.001.03     | NEGATIVE_RESPONSE_TO_RECALL<br/>NEGATIVE_RESPONSE_TO_RECALL_FROM_ORIGINATOR                                                        |
 
+##### P27 - NORDIC CREDIT TRANSFERS
+
+| Message Name                     | Msg ID            | Schema ID       |
+|----------------------------------|-------------------|-----------------|
+| FIToFICustomerCreditTransfer     | FIToFICstmrCdtTrf | pacs.008.001.02 |
+| FIToFIPaymentStatusReport        | FIToFIPmtStsRpt   | pacs.002.001.03 |
+| PaymentReturn                    | PmtRtr            | pacs.004.001.02 |
+| FIToFIPaymentCancellationRequest | FIToFIPmtCxlReq   | camt.056.001.01 |
+| ResolutionOfInvestigation        | RsltnOfInvstgtn   | camt.029.001.03 |
+| ResolutionOfInvestigation08      | RsltnOfInvstgtn   | camt.029.001.08 |
+| RequestToModifyPayment           | ReqToModfyPmt     | camt.087.001.05 |
+| ClaimNonReceipt                  | ClmNonRct         | camt.027.001.06 |
+
+
 ## RT Message Support List
 
 ##### FIToFICustomerCreditTransfer (pacs.008.001.02) autoReply return objects
 
-| Message Name                                      | Schema ID       | Variations support                |
-|---------------------------------------------------|-----------------|-----------------------------------|
-| PaymentReturn                                     | pacs.004.001.02 | eba, epc, sibs, dias, epc-instant |
-| FIToFIPaymentInstantStatusInquiryForInvestigation | pacs.028.001.01 | eba, epc, sibs, dias, epc-instant |
-| ClaimNonReceipt                                   | camt.027.001.06 | eba, epc, sibs, dias              |
-| ResolutionOfInvestigation                         | camt.029.001.03 | eba, epc, sibs, dias, epc-instant |
-| ResolutionOfInvestigation08                       | camt.029.001.08 | eba, epc, sibs, dias              |
-| FIToFIPaymentCancellationRequest                  | camt.056.001.01 | eba, epc, sibs, dias, epc-instant |
-| RequestToModifyPayment                            | camt.087.001.05 | eba, epc, sibs, dias              |
-| FIToFIPaymentStatusReport                         | pacs.002.001.03 | epc-instant                       |
+| Message Name                                      | Schema ID       | Variations support                     |
+|---------------------------------------------------|-----------------|----------------------------------------|
+| PaymentReturn                                     | pacs.004.001.02 | eba, epc, sibs, dias, epc-instant, p27 |
+| FIToFIPaymentInstantStatusInquiryForInvestigation | pacs.028.001.01 | eba, epc, sibs, dias, epc-instant      |
+| ClaimNonReceipt                                   | camt.027.001.06 | eba, epc, sibs, dias, p27              |
+| ResolutionOfInvestigation                         | camt.029.001.03 | eba, epc, sibs, dias, epc-instant, p27 |
+| ResolutionOfInvestigation08                       | camt.029.001.08 | eba, epc, sibs, dias , p27             |
+| FIToFIPaymentCancellationRequest                  | camt.056.001.01 | eba, epc, sibs, dias, epc-instant, p27 |
+| RequestToModifyPayment                            | camt.087.001.05 | eba, epc, sibs, dias, p27              |
+| FIToFIPaymentStatusReport                         | pacs.002.001.03 | epc-instant                            |
 
 ##### FIToFICustomerDirectDebit (pacs.003.001.02) autoReply return objects
 
