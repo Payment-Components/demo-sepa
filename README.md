@@ -24,7 +24,7 @@ Import the SDK
 <dependency>
     <groupId>gr.datamation</groupId>
     <artifactId>sepa-core-jaxb</artifactId>
-    <version>21.16.0</version>
+    <version>22.1.0</version>
     <classifier>demo</classifier>
 </dependency>
 ```
@@ -40,7 +40,7 @@ repositories {
 ```
 Import the SDK
 ```groovy
-implementation 'gr.datamation:sepa-core-jaxb:21.13.0:demo@jar'
+implementation 'gr.datamation:sepa-core-jaxb:22.1.0:demo@jar'
 ```
 In case you purchase the SDK you will be given a protected Maven repository with a user name and a password. You can configure your project to download the SDK from there.
 
